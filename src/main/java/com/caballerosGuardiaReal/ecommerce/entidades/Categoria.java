@@ -12,9 +12,10 @@ public class Categoria {
 
     @Id
     @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
+   @GenericGenerator(name = "uuid", strategy = "uuid2")
+   // @GenericGenerator(name = "uuid", type = org.hibernate.id.uuid.UuidGenerator.class)
     private String Id;
-    
+
     private String nombre;
-    
+
 }

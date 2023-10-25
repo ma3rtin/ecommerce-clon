@@ -64,12 +64,7 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-	 <dependency>
-	  <groupId>hibernate</groupId>
-	  <artifactId>hibernate-annotations</artifactId>
-	  <version>3.1beta4</version>
-	  <type>jar</type>
-	 </dependency>
+	
 	</dependencies>
 
 	<build>

@@ -17,13 +17,13 @@ public class Producto {
 
     @Id
     @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", type = org.hibernate.id.uuid.UuidGenerator.class)
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
 
     private String nombre;
     private Double precio;
     private String Descripcion;
-    private Integer cantidad;
+    private Integer stock;
 
     @Enumerated(EnumType.STRING)
     private Condicion condicion;
@@ -37,4 +37,6 @@ public class Producto {
     @OneToOne
     private Fabricante fabricante;
 
+    private Boolean estado;//activo: true//no activo: false
+    
 }
