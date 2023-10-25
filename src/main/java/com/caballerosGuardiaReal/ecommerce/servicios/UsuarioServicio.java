@@ -1,10 +1,12 @@
 package com.caballerosGuardiaReal.ecommerce.servicios;
 
+import com.caballerosGuardiaReal.ecommerce.entidades.Imagen;
 import com.caballerosGuardiaReal.ecommerce.entidades.Usuario;
 import com.caballerosGuardiaReal.ecommerce.enumeraciones.Rol;
 import com.caballerosGuardiaReal.ecommerce.repositorios.UsuarioRepositorio;
 import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -18,20 +20,21 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
-public class UsuarioServicio implements UserDetailsService{
+public class UsuarioServicio{
     
     @Autowired
     private UsuarioRepositorio usuarioRepositorio;
     
-    /*
-    @Autowired
-    private ImagenServicio imagenServicio
-    */
     
-    @Transactional //Falta archivo
-    public void crearUsuario(String nombreCompleto, String clave, String email, String direccion, Integer codigoPostal){
+    @Autowired
+    private ImagenServicio imagenServicio;
+    
+    
+    @Transactional//Falta MiException
+    public void crearUsuario(MultipartFile archivo, String nombreCompleto, String clave, String email, String direccion, Integer codigoPostal) throws IOException{
         
         //validar(nombreCompleto, clave, email, direccion, codigoPostal);
 
@@ -44,16 +47,16 @@ public class UsuarioServicio implements UserDetailsService{
         u.setCodigoPostal(codigoPostal);
         u.setRol(Rol.CLIENTE);
         
-        /*
-        Imagen imagen = imagenServicio.guardar(archivo);
-        u.setImagen(imagen);
-        */
+        
+//        Imagen imagen = imagenServicio.guardar(archivo);
+//        u.setImagen(imagen);
+        
         
         usuarioRepositorio.save(u);
     }
     
-    @Transactional//Falta imagen
-    public void modificarUsuario(String id, String nombreCompleto, String clave, String email, String direccion, Integer codigoPostal){
+    @Transactional//Falta MiException
+    public void modificarUsuario(MultipartFile archivo, String id, String nombreCompleto, String clave, String email, String direccion, Integer codigoPostal) throws IOException{
         
         validar(nombreCompleto, clave, email, direccion, codigoPostal);
         
@@ -69,7 +72,6 @@ public class UsuarioServicio implements UserDetailsService{
             u.setDireccion(direccion);
             u.setCodigoPostal(codigoPostal);
             
-            /*
             String idImagen = null;
             
             if (u.getImagen() != null) {
@@ -79,7 +81,6 @@ public class UsuarioServicio implements UserDetailsService{
             Imagen imagen = imagenServicio.actualizar(archivo, idImagen);
             
             u.setImagen(imagen);
-            */
             
             usuarioRepositorio.save(u);
         }
@@ -122,28 +123,28 @@ public class UsuarioServicio implements UserDetailsService{
         }
     }
     
-     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-
-        Usuario usuario = usuarioRepositorio.buscarPorEmail(email);
-
-        if (usuario != null) {
-
-            List<GrantedAuthority> permisos = new ArrayList();
-
-            GrantedAuthority p = new SimpleGrantedAuthority("ROLE_" + usuario.getRol().toString());
-
-            permisos.add(p);
-
-            ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-
-            HttpSession session = attr.getRequest().getSession(true);
-
-            session.setAttribute("usuariosession", usuario);
-
-            return new User(usuario.getEmail(), usuario.getClave(), permisos);
-        } else {
-            return null;
-        }
-}
+//     @Override
+//    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+//
+//        Usuario usuario = usuarioRepositorio.buscarPorEmail(email);
+//
+//        if (usuario != null) {
+//
+//            List<GrantedAuthority> permisos = new ArrayList();
+//
+//            GrantedAuthority p = new SimpleGrantedAuthority("ROLE_" + usuario.getRol().toString());
+//
+//            permisos.add(p);
+//
+//            ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+//
+//            HttpSession session = attr.getRequest().getSession(true);
+//
+//            session.setAttribute("usuariosession", usuario);
+//
+//            return new User(usuario.getEmail(), usuario.getClave(), permisos);
+//        } else {
+//            return null;
+//        }
+//}
 }

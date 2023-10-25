@@ -1,6 +1,7 @@
 package com.caballerosGuardiaReal.ecommerce.Controladores;
 
 import com.caballerosGuardiaReal.ecommerce.servicios.UsuarioServicio;
+import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping("/")
@@ -24,11 +26,11 @@ public class PortalControlador {
     }
     
     @PostMapping("/registro")
-    public String registro(@RequestParam String nombreCompleto, @RequestParam String clave,@RequestParam String email,@RequestParam String direccion,@RequestParam Integer codigoPostal, ModelMap modelo){
+    public String registro(@RequestParam String nombreCompleto, @RequestParam String clave, @RequestParam(required=false) MultipartFile  archivo, @RequestParam String email,@RequestParam String direccion,@RequestParam Integer codigoPostal, ModelMap modelo) throws IOException{
         
         //Falta try catch
-        usuarioServicio.crearUsuario(nombreCompleto, clave, email, direccion, codigoPostal);
+        usuarioServicio.crearUsuario(archivo, nombreCompleto, clave, email, direccion, codigoPostal);
         
-        return "inicio.html";
+        return "formulario.html";
     }
 }
