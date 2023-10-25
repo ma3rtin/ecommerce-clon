@@ -1,0 +1,53 @@
+body{
+    background-image:linear-gradient(
+        0deg,
+        rgba(0,0,0,0.5),
+        rgba(0,0,0,0.5)   
+        ),
+        url("../img/fondo.jpg");
+        background-size: cover;
+        background-position: center center;    
+}
+header{
+
+    position: fixed;
+    background-color: transparent;
+   
+}
+
+
+header nav{
+    
+    background: none;
+}
+#carouselExampleFade{
+width: auto;
+height: auto;
+display: flex;
+}
+#hero{
+    color: rgb(255, 255, 255);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    
+}
+#galeria{
+    
+display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px 10px;
+
+    
+
+}
+#galeria h2{
+    color: azure;
+}
