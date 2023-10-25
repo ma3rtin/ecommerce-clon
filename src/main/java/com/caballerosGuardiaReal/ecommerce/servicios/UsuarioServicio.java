@@ -50,10 +50,9 @@ public class UsuarioServicio implements UserDetailsService{
         */
         
         usuarioRepositorio.save(u);
-        
     }
     
-    @Transactional//falta imagen
+    @Transactional//Falta imagen
     public void modificarUsuario(String id, String nombreCompleto, String clave, String email, String direccion, Integer codigoPostal){
         
         validar(nombreCompleto, clave, email, direccion, codigoPostal);
