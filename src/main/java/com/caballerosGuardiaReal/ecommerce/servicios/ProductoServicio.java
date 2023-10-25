@@ -94,7 +94,7 @@ public class ProductoServicio {
     @Transactional
     //agregar el miException
     //voy a listar la categoria y el fabricante
-    public Producto actualizar(String idProducto ,String nombre, Double precio, String descripcion, Integer stock, Condicion condicion, String idCategoria , MultipartFile archivo, String idFabricante, Booblean estado){
+    public Producto actualizar(String idProducto ,String nombre, Double precio, String descripcion, Integer stock, Condicion condicion, String idCategoria , MultipartFile archivo, String idFabricante, Boolean estado){
     //validar?
     
         Optional <Producto> respuesta = productoRepositorio.findById(idProducto);
