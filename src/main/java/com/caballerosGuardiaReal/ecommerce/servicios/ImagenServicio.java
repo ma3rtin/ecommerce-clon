@@ -23,8 +23,6 @@ public class ImagenServicio {
 
         if (archivo != null) {
 
-          
-
                 Imagen imagen = new Imagen();
 
                 imagen.setMime(archivo.getContentType());
