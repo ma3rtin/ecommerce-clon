@@ -3,6 +3,7 @@ package com.caballerosGuardiaReal.ecommerce.servicios;
 import com.caballerosGuardiaReal.ecommerce.entidades.Imagen;
 import com.caballerosGuardiaReal.ecommerce.entidades.Usuario;
 import com.caballerosGuardiaReal.ecommerce.enumeraciones.Rol;
+import com.caballerosGuardiaReal.ecommerce.excepciones.MiException;
 import com.caballerosGuardiaReal.ecommerce.repositorios.UsuarioRepositorio;
 import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
@@ -34,7 +35,7 @@ public class UsuarioServicio{
     
     
     @Transactional//Falta MiException
-    public void crearUsuario(MultipartFile archivo, String nombreCompleto, String clave, String email, String direccion, Integer codigoPostal) throws IOException{
+    public void crearUsuario(MultipartFile archivo, String nombreCompleto, String clave, String email, String direccion, Integer codigoPostal)throws MiException {
         
         //validar(nombreCompleto, clave, email, direccion, codigoPostal);
 
@@ -56,7 +57,7 @@ public class UsuarioServicio{
     }
     
     @Transactional//Falta MiException
-    public void modificarUsuario(MultipartFile archivo, String id, String nombreCompleto, String clave, String email, String direccion, Integer codigoPostal) throws IOException{
+    public void modificarUsuario(MultipartFile archivo, String id, String nombreCompleto, String clave, String email, String direccion, Integer codigoPostal) throws MiException, IOException {
         
         validar(nombreCompleto, clave, email, direccion, codigoPostal);
         
@@ -87,26 +88,30 @@ public class UsuarioServicio{
     }
     
     //Agregar throws MiException
-    public void validar(String nombreCompleto, String clave, String email, String direccion, Integer codigoPostal) {
+    public void validar(String nombreCompleto, String clave, String email, String direccion, Integer codigoPostal) throws MiException{
          if (nombreCompleto.isEmpty() || nombreCompleto == null) {
-            //throw new MiException("El nombre no puede estar vacío");
+            throw new MiException("El nombre no puede estar vacío");
         }
         if (email.isEmpty() || email == null) {
-            //throw new MiException("El email no puede estar vacío");
+            throw new MiException("El email no puede estar vacío");
         }
         if (clave.isEmpty() || clave == null || clave.length() <= 5) {
-            //throw new MiException("La clave no puede estar vacío");
+            throw new MiException("La clave no puede estar vacío");
         }
         if (direccion.isEmpty() || direccion == null) {
-            //throw new MiException("La dirección no puede estar vacio");
+            throw new MiException("La dirección no puede estar vacio");
         }
         if(codigoPostal == null){
-            //throw new MiException("El código postal no puede estar vacío");
+            throw new MiException("El código postal no puede estar vacío");
         }
     }
     
     public Usuario getOne(String id){
         return usuarioRepositorio.findById(id).get();
+    }
+    
+    public List<Usuario> getAll(){
+        return usuarioRepositorio.findAll();
     }
     
     @Transactional

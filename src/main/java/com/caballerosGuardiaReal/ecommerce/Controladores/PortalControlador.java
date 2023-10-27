@@ -1,5 +1,6 @@
 package com.caballerosGuardiaReal.ecommerce.Controladores;
 
+import com.caballerosGuardiaReal.ecommerce.excepciones.MiException;
 import com.caballerosGuardiaReal.ecommerce.servicios.UsuarioServicio;
 import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +29,19 @@ public class PortalControlador {
     @PostMapping("/registro")
     public String registro(@RequestParam String nombreCompleto, @RequestParam String clave, @RequestParam(required=false) MultipartFile  archivo, @RequestParam String email,@RequestParam String direccion,@RequestParam Integer codigoPostal, ModelMap modelo) throws IOException{
         
-        //Falta try catch
+        try {
+            
         usuarioServicio.crearUsuario(archivo, nombreCompleto, clave, email, direccion, codigoPostal);
         
-        return "formulario.html";
+        modelo.put("exito", "Registro exitoso.");
+        
+        } catch(MiException e){
+            
+            modelo.put("error", e.getMessage());
+            return "formulario.html";
+            
+        }
+        
+        return "index.html";
     }
 }

@@ -6,6 +6,7 @@ import com.caballerosGuardiaReal.ecommerce.entidades.Fabricante;
 import com.caballerosGuardiaReal.ecommerce.entidades.Imagen;
 import com.caballerosGuardiaReal.ecommerce.entidades.Producto;
 import com.caballerosGuardiaReal.ecommerce.enumeraciones.Condicion;
+import com.caballerosGuardiaReal.ecommerce.excepciones.MiException;
 import com.caballerosGuardiaReal.ecommerce.repositorios.CategoriaRepositorio;
 import com.caballerosGuardiaReal.ecommerce.repositorios.FabricanteRepositorio;
 import com.caballerosGuardiaReal.ecommerce.repositorios.ProductoRepositorio;
@@ -43,7 +44,7 @@ public class ProductoServicio {
     
     @Transactional
     //falta agrgar miException
-    public Producto crearProducto(String nombre, Double precio, String descripcion, Integer stock, Condicion condicion, String idCategoria , MultipartFile archivo, String idFabricante){
+    public Producto crearProducto(String nombre, Double precio, String descripcion, Integer stock, Condicion condicion, String idCategoria , MultipartFile archivo, String idFabricante) throws MiException{
         
         Producto producto = new Producto();
         
