@@ -6,6 +6,7 @@ import com.caballerosGuardiaReal.ecommerce.entidades.Fabricante;
 import com.caballerosGuardiaReal.ecommerce.entidades.Imagen;
 import com.caballerosGuardiaReal.ecommerce.entidades.Producto;
 import com.caballerosGuardiaReal.ecommerce.enumeraciones.Condicion;
+import com.caballerosGuardiaReal.ecommerce.excepciones.MiException;
 import com.caballerosGuardiaReal.ecommerce.repositorios.CategoriaRepositorio;
 import com.caballerosGuardiaReal.ecommerce.repositorios.FabricanteRepositorio;
 import com.caballerosGuardiaReal.ecommerce.repositorios.ProductoRepositorio;
@@ -82,7 +83,7 @@ public class ProductoServicio {
         //ver lo de el try catch
         try {
             imagen = imagenServicio.guardar(archivo);
-        } catch (IOException ex) {
+        } catch (IOException | MiException  ex) {
             Logger.getLogger(ProductoServicio.class.getName()).log(Level.SEVERE, null, ex);
         }
         
@@ -143,7 +144,7 @@ public class ProductoServicio {
             //ver el try catch
             try {
                 imagen = imagenServicio.actualizar(archivo, idImagen);
-            } catch (IOException ex) {
+            } catch (IOException |  MiException ex) {
                 Logger.getLogger(ProductoServicio.class.getName()).log(Level.SEVERE, null, ex);
             }
             
