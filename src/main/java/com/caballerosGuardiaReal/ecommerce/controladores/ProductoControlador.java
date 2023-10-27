@@ -125,13 +125,10 @@ public class ProductoControlador {
     @GetMapping("/alta_baja/{id}")
     public String AltaBaja(String id) {
         
+        productoServicio.cambiarEstado(id);
         
+        return "redirect:/producto/lista";
         
-    }
-
-    @PostMapping("/alta_baja/{id}")
-    public String AltaBaja(String id, String algo) {
-
     }
 
 }

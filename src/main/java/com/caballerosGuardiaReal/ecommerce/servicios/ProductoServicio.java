@@ -165,7 +165,22 @@ public class ProductoServicio {
     
     }
     
+    @Transactional
+    public void cambiarEstado(String id){
+        
+        Optional <Producto> respuesta = productoRepositorio.findById(id);
+        
+        if(respuesta.isPresent()){
+            
+            Producto producto = respuesta.get();
+            
+            producto.setEstado((producto.getEstado())?false:true);
+            
+            productoRepositorio.save(producto);
+            
+        }
     
+    }
     
     
 }

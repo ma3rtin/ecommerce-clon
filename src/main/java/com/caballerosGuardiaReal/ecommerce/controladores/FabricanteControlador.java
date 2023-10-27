@@ -8,4 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("fabricante")
 public class FabricanteControlador {
     
+    
+    
+    
 }
