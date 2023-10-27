@@ -44,7 +44,7 @@ public class ProductoServicio {
     
     @Transactional
     //falta agrgar miException
-    public Producto crearProducto(String nombre, Double precio, String descripcion, Integer stock, Condicion condicion, String idCategoria , MultipartFile archivo, String idFabricante){
+    public Producto crearProducto(String nombre, Double precio, String descripcion, Integer stock, Condicion condicion, String idCategoria , MultipartFile archivo, String idFabricante) throws MiException{
         
         Producto producto = new Producto();
         

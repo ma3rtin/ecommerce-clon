@@ -20,6 +20,7 @@ public class ImagenServicio {
       @Autowired
     private ImagenRepositorio imagenRepositorio;
 
+<<<<<<< HEAD
       
       
       
@@ -32,6 +33,13 @@ public class ImagenServicio {
        
             
                  Imagen imagen = new Imagen();
+=======
+    public Imagen guardar(MultipartFile archivo) throws MiException, IOException {
+
+        if (archivo != null) {
+            try{
+                Imagen imagen = new Imagen();
+>>>>>>> martin
 
                 imagen.setMime(archivo.getContentType());
 
@@ -40,6 +48,7 @@ public class ImagenServicio {
                 imagen.setContenido(archivo.getBytes());
 
                 return imagenRepositorio.save(imagen);
+<<<<<<< HEAD
             
             
             
@@ -52,6 +61,11 @@ public class ImagenServicio {
                 
          }
         
+=======
+            }catch (Exception e){
+                System.out.println(e.getMessage());
+            }
+>>>>>>> martin
         }
 
                return null;   
