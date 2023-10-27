@@ -4,6 +4,9 @@ package com.caballerosGuardiaReal.ecommerce.entidades;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import java.util.Date;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
@@ -18,8 +21,13 @@ public class Orden {
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     
     private String Id;
+    
+    @Temporal(TemporalType.DATE)
     private Date fechaPedido;
-    //private List<Producto> productos;
+    
+//    @OneToMany
+//    private Producto producto;
+    
     //private Estado pendiente; //pasa a confirmado cuando se emite el ticket
 
     
