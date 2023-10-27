@@ -23,7 +23,7 @@ public class ImagenServicio {
       
       
       
-    public Imagen guardar(MultipartFile archivo) throws MiException,Exception {
+    public Imagen guardar(MultipartFile archivo) throws MiException,IOException {
 
              if (archivo != null) {
         
@@ -45,7 +45,7 @@ public class ImagenServicio {
             
             
             
-        } catch (Exception e) {
+        } catch (IOException e) {
                 
                 System.out.println(e.getMessage());
                 throw  new MiException("Error al guardar la imagen!");
