@@ -46,12 +46,12 @@ public class ProductoControlador {
 
     @PostMapping("/registro")
     public String registro(@RequestParam String nombre, @RequestParam Double precio, @RequestParam(required = false) String descripcion,
-            @RequestParam Integer stock, @RequestParam Condicion condidion, @RequestParam(required = false) MultipartFile archivo,
-            @RequestParam String idCategoria, @RequestParam String idFabricante, ModelMap modelo) {
-
+            @RequestParam Integer stock, @RequestParam String condicion, @RequestParam(required = false) MultipartFile archivo,
+            @RequestParam String idCategoria, @RequestParam String idFabricante,@RequestParam String EAN,  ModelMap modelo) {
+        System.out.println("----------------------------------------------------");
         try {
             //adentro de producto servicio valida y pouede dar un error
-            productoServicio.crearProducto(nombre, precio, descripcion, stock, condidion, idCategoria, archivo, idFabricante);
+            productoServicio.crearProducto(nombre, precio, descripcion, stock,Condicion.valueOf(condicion), idCategoria, archivo, idFabricante,EAN);
         } catch (Exception e) {
             //modelo.put("error",ex.getMessage());
             List<Categoria> categorias = categoriaServicio.listarCategorias();
@@ -60,7 +60,7 @@ public class ProductoControlador {
             modelo.addAttribute("categorias", categorias);
             modelo.addAttribute("fabricantes", fabricante);
 
-            return "libro_form.html";
+            return "producto_form.html";
         }
 
         ///nose a donde retornar
@@ -99,12 +99,12 @@ public class ProductoControlador {
     //@RequestParam String idCategoria, @RequestParam String idFabricante, ModelMap modelo) {
     @PostMapping("/modificar/{id}")
     public String modificar(@PathVariable String id, @RequestParam String nombre, @RequestParam Double precio, @RequestParam(required = false) String descripcion,
-            @RequestParam Integer stock, @RequestParam Condicion condicion, @RequestParam(required = false) MultipartFile archivo,
-            @RequestParam String idCategoria, @RequestParam String idFabricante, @RequestParam Boolean estado, ModelMap modelo) {
+            @RequestParam Integer stock, @RequestParam String condicion, @RequestParam(required = false) MultipartFile archivo,
+            @RequestParam String idCategoria, @RequestParam String idFabricante, @RequestParam Boolean estado, @RequestParam String EAN, ModelMap modelo) {
 
         try {
             //ver lo de estado
-            productoServicio.actualizar(idFabricante, nombre, precio, descripcion, stock, condicion, idCategoria, archivo, idFabricante, estado);
+            productoServicio.actualizar(idFabricante, nombre, precio, descripcion, stock,Condicion.valueOf(condicion) , idCategoria, archivo, idFabricante, estado, EAN);
             return "redirect:../lista";
             
         } catch (Exception e) {
@@ -114,12 +114,11 @@ public class ProductoControlador {
 
             modelo.addAttribute("producto", producto);
             modelo.addAttribute("categorias", categorias);
-            modelo.addAttribute("fabricante", fabricantes);
+            modelo.addAttribute("fabricantes", fabricantes);
 
             return "producto_modificar.html";
         }
 
-        
     }
 
     @GetMapping("/alta_baja/{id}")
