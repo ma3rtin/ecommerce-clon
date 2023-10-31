@@ -42,10 +42,15 @@ public class ProductoServicio {
 
     @Transactional
     //falta agrgar miException
+<<<<<<< HEAD
     public Producto crearProducto(String nombre, Double precio, String descripcion, Integer stock,
             Condicion condicion, String idCategoria, MultipartFile archivo, String idFabricante,
             String EAN) {
 
+=======
+    public Producto crearProducto(String nombre, Double precio, String descripcion, Integer stock, Condicion condicion, String idCategoria , MultipartFile archivo, String idFabricante) throws MiException{
+        
+>>>>>>> 1f4f91bfcb5fdd96d81ca25c3a121ed69e842549
         Producto producto = new Producto();
 
         //falta validar
