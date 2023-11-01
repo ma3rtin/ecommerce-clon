@@ -24,7 +24,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
-public class UsuarioServicio{
+public class UsuarioServicio implements UserDetailsService{
     
     @Autowired
     private UsuarioRepositorio usuarioRepositorio;
@@ -39,7 +39,7 @@ public class UsuarioServicio{
         
         //validar(nombreCompleto, clave, email, direccion, codigoPostal);
 
-        Usuario u = new Usuario();
+       Usuario u = new Usuario();
         
         u.setNombreCompleto(nombreCompleto);
         u.setClave(clave);
@@ -128,28 +128,28 @@ public class UsuarioServicio{
         }
     }
     
-//     @Override
-//    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-//
-//        Usuario usuario = usuarioRepositorio.buscarPorEmail(email);
-//
-//        if (usuario != null) {
-//
-//            List<GrantedAuthority> permisos = new ArrayList();
-//
-//            GrantedAuthority p = new SimpleGrantedAuthority("ROLE_" + usuario.getRol().toString());
-//
-//            permisos.add(p);
-//
-//            ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-//
-//            HttpSession session = attr.getRequest().getSession(true);
-//
-//            session.setAttribute("usuariosession", usuario);
-//
-//            return new User(usuario.getEmail(), usuario.getClave(), permisos);
-//        } else {
-//            return null;
-//        }
-//}
+     @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+
+        Usuario usuario = usuarioRepositorio.buscarPorEmail(email);
+
+        if (usuario != null) {
+
+            List<GrantedAuthority> permisos = new ArrayList();
+
+            GrantedAuthority p = new SimpleGrantedAuthority("ROLE_" + usuario.getRol().toString());
+
+            permisos.add(p);
+
+            ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+
+            HttpSession session = attr.getRequest().getSession(true);
+
+            session.setAttribute("usuariosession", usuario);
+
+            return new User(usuario.getEmail(), usuario.getClave(), permisos);
+        } else {
+            return null;
+        }
+}
 }

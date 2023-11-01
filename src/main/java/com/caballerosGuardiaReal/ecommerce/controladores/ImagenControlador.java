@@ -1,8 +1,10 @@
 
 package com.caballerosGuardiaReal.ecommerce.controladores;
 
-import java.net.http.HttpHeaders;
+import com.caballerosGuardiaReal.ecommerce.entidades.Usuario;
+import com.caballerosGuardiaReal.ecommerce.servicios.UsuarioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -16,26 +18,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @author Matias Insaurralde
  */
 
-
+///revisar esto no funca
 @Controller
 @RequestMapping("/imagen")
 public class ImagenControlador {
     
-//       @Autowired
-//   private UsuarioServicio usuarioServicio;
-//    
-//    @GetMapping("/perfil/{id}")
-//   public ResponseEntity<byte[]> ImagenUsuario(@PathVariable String id){
-//       Usuario = UsuarioServicio.getOne(id);
-//        
-//       byte[] imagen = Usuario.getImagen().getContenido();
-//        
-//       HttpHeaders headers = new HttpHeaders();
-//       headers.setContentType(MediaType.IMAGE_JPEG);
-//        
-//       return new ResponseEntity<>(imagen,headers,HttpStatus.OK);
-//    }
-//    
+       @Autowired
+   private UsuarioServicio usuarioServicio;
+    
+    @GetMapping("/producto/{id}")
+   public ResponseEntity<byte[]> ImagenUsuario(@PathVariable String id){
+       Usuario usuario = usuarioServicio.getOne(id);
+        
+       byte[] imagen = usuario.getImagen().getContenido();
+        
+       HttpHeaders headers = new HttpHeaders();
+       headers.setContentType(MediaType.IMAGE_JPEG);
+        
+       return new ResponseEntity<>(imagen,headers,HttpStatus.OK);
+    }
+    
     
     
     

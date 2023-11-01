@@ -3,6 +3,7 @@ package com.caballerosGuardiaReal.ecommerce.entidades;
 
 
 import jakarta.persistence.Basic;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -32,6 +33,7 @@ public class Imagen {
 
     @Lob
     @Basic(fetch = FetchType.LAZY)
+    @Column(name = "contenido", columnDefinition = "LONGBLOB")
     private byte[] contenido;
 
     public Imagen(String Id, String mime, String nombre, byte[] contenido) {
