@@ -18,6 +18,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -42,7 +43,7 @@ public class UsuarioServicio implements UserDetailsService{
        Usuario u = new Usuario();
         
         u.setNombreCompleto(nombreCompleto);
-        u.setClave(clave);
+        u.setClave(new BCryptPasswordEncoder().encode(clave));
         u.setEmail(email);
         u.setDireccion(direccion);
         u.setCodigoPostal(codigoPostal);

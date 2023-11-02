@@ -27,29 +27,12 @@ public class Imagen {
    //@GenericGenerator(name = "uuid", type = org.hibernate.id.uuid.UuidGenerator.class)
     private String Id;
      
-    private String mime;
-
     private String nombre;
 
     @Lob
     @Basic(fetch = FetchType.LAZY)
     @Column(name = "contenido", columnDefinition = "LONGBLOB")
     private byte[] contenido;
-
-    public Imagen(String Id, String mime, String nombre, byte[] contenido) {
-        this.Id = Id;
-        this.mime = mime;
-        this.nombre = nombre;
-        this.contenido = contenido;
-    }
-
-    public Imagen() {
-    }
-
-
-    
-
-
 
 }
 
