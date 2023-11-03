@@ -27,6 +27,8 @@ public class Imagen {
    //@GenericGenerator(name = "uuid", type = org.hibernate.id.uuid.UuidGenerator.class)
     private String Id;
      
+    private String mime;
+    
     private String nombre;
 
     @Lob

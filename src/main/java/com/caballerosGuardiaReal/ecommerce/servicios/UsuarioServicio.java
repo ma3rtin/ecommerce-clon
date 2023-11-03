@@ -36,7 +36,7 @@ public class UsuarioServicio implements UserDetailsService{
     
     
     @Transactional//Falta MiException
-    public void crearUsuario(MultipartFile archivo, String nombreCompleto, String clave, String email, String direccion, Integer codigoPostal)throws MiException {
+    public void crearUsuario(MultipartFile archivo, String nombreCompleto, String clave, String email, String direccion, Integer codigoPostal)throws MiException, IOException {
         
         //validar(nombreCompleto, clave, email, direccion, codigoPostal);
 
@@ -50,8 +50,8 @@ public class UsuarioServicio implements UserDetailsService{
         u.setRol(Rol.CLIENTE);
         
         
-//        Imagen imagen = imagenServicio.guardar(archivo);
-//        u.setImagen(imagen);
+        Imagen imagen = imagenServicio.guardar(archivo);
+        u.setImagen(imagen);
         
         
         usuarioRepositorio.save(u);
